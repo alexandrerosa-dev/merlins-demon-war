@@ -15,8 +15,11 @@ public class GameController : MonoBehaviour
 
     public List<CardData> cards = new List<CardData>();
 
-    public Sprite[] healthNumbers = new Sprite[0];
-    public Sprite[] damageNumbers = new Sprite[0];
+    public Sprite[] healthNumbers = new Sprite[10];
+    public Sprite[] damageNumbers = new Sprite[10];
+
+    public GameObject cardPrefab = null;
+    public Canvas     canvas     = null;
 
     private void Awake()
     {
