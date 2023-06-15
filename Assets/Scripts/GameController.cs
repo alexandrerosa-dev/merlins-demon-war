@@ -27,6 +27,8 @@ public class GameController : MonoBehaviour
 
         playerDeck.Create();
         enemyDeck.Create();
+
+        DealHands();
     }
 
     // Voltar ao menu principal
@@ -40,5 +42,14 @@ public class GameController : MonoBehaviour
     public void SkipTurn()
     {
         Debug.Log("Skip turn");
+    }
+
+    internal void DealHands()
+    {
+        for (int t = 0; t < 3; t++)
+        {
+            playerDeck.DealCard(playersHand);
+            enemyDeck.DealCard(enemysHand);
+        }
     }
 }

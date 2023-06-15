@@ -64,10 +64,20 @@ public class Deck
         }
         else
         {
-            Debug.Log("No card component found!");
+            Debug.LogError("No card component found!");
             return null;
         }
     }
 
-
+    internal void DealCard(Hand hand)
+    {
+        for (int h = 0; h<3; h++)
+        {
+            if (hand.cards[h] == null)
+            {
+                hand.cards[h] = CreateNewCard(hand.positions[h].position, hand.animNames[h]);
+                return;
+            }
+        }
+    }
 }
