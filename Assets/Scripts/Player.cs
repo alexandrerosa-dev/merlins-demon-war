@@ -38,6 +38,6 @@ public class Player : MonoBehaviour, IDropHandler
         if (!GameController.instance.isPlayable)
             return;
 
-        Debug.Log("Card dropped onto player/enemy!");
+        
     }
 }

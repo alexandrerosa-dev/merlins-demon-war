@@ -2220,6 +2220,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 4899619562852822632, guid: 055d4dd8f69f6b84ba722dff0d083311,
     type: 3}
   canvas: {fileID: 1468439179}
+  isPlayable: 0
 --- !u!4 &1377798157
 Transform:
   m_ObjectHideFlags: 0
