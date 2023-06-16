@@ -2186,6 +2186,8 @@ MonoBehaviour:
     - CardDeal5
     - CardDeal6
     isPlayers: 0
+  player: {fileID: 114216475}
+  enemy: {fileID: 1926763549}
   cards:
   - {fileID: 11400000, guid: 1df96997d7ae1f24684468cd89e12263, type: 2}
   - {fileID: 11400000, guid: 7f24e51ed12b90a42975c9e1a73df346, type: 2}

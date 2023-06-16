@@ -13,6 +13,9 @@ public class GameController : MonoBehaviour
     public Hand playersHand = new Hand();
     public Hand enemysHand = new Hand();
 
+    public Player player = null;
+    public Player enemy = null;
+
     public List<CardData> cards = new List<CardData>();
 
     public Sprite[] healthNumbers = new Sprite[10];
@@ -56,5 +59,47 @@ public class GameController : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
         isPlayable = true;
+    }
+
+    internal bool UseCard(Card card, Player usingOnPlayer, Hand fromHand)
+    {
+        // IsCardValid
+        // CastCard
+        // RemoveCard
+        // DealReplacementCard
+        if (!CardValid(card, usingOnPlayer, fromHand))
+            return false;
+
+        return false;
+    }
+
+    internal bool CardValid(Card cardBeingPlayed, Player usingOnPlayer, Hand fromHand)
+    {
+        bool valid = false;
+
+        if (cardBeingPlayed == null)
+            return false;
+
+        if (fromHand.isPlayers)
+        {
+            if (cardBeingPlayed.cardData.cost <= player.mana)
+            {
+                if (usingOnPlayer.isPlayer && cardBeingPlayed.cardData.isDefenseCard)
+                    valid = true;
+                if (!usingOnPlayer.isPlayer && !cardBeingPlayed.cardData.isDefenseCard)
+                    valid = true;
+            }
+        }
+        else  // from enemys / do inimigo
+        {
+            if (cardBeingPlayed.cardData.cost <= enemy.mana)
+            {
+                if (!usingOnPlayer.isPlayer && cardBeingPlayed.cardData.isDefenseCard)
+                    valid = true;
+                if (usingOnPlayer.isPlayer && !cardBeingPlayed.cardData.isDefenseCard)
+                    valid = true;
+            }
+        }
+        return valid;
     }
 }

@@ -38,6 +38,11 @@ public class Player : MonoBehaviour, IDropHandler
         if (!GameController.instance.isPlayable)
             return;
 
-        
+        GameObject obj = eventData.pointerDrag;
+        if (obj != null)
+        {
+            Card card = obj.GetComponent<Card>();
+
+        }
     }
 }
