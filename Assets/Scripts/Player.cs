@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDropHandler
 {
     public Image playerImage       = null;
     public Image mirrorImage       = null;
@@ -32,4 +33,11 @@ public class Player : MonoBehaviour
             animator.SetTrigger("Hit");
     }
 
+    public void OnDrop(PointerEventData eventData)
+    {
+        if (!GameController.instance.isPlayable)
+            return;
+
+        Debug.Log("Card dropped onto player/enemy!");
+    }
 }
