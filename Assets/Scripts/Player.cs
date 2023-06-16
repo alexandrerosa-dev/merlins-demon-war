@@ -42,7 +42,10 @@ public class Player : MonoBehaviour, IDropHandler
         if (obj != null)
         {
             Card card = obj.GetComponent<Card>();
-
+            if (card != null)
+            {
+                GameController.instance.UseCard(card, this, GameController.instance.playersHand);
+            }
         }
     }
 }

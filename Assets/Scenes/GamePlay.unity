@@ -2223,6 +2223,16 @@ MonoBehaviour:
     type: 3}
   canvas: {fileID: 1468439179}
   isPlayable: 0
+  effectFromLeftPrefab: {fileID: 9071478637928364201, guid: 600f0d747d998cd4ea3cb965edcd05a9,
+    type: 3}
+  effectFromRightPrefab: {fileID: 1151411713655415015, guid: af7176cade2d36e4791c60ca911a3b9e,
+    type: 3}
+  fireBallImage: {fileID: 21300000, guid: 6a04d2278cbf7b141974a9b86232ec43, type: 3}
+  iceBallImage: {fileID: 21300000, guid: d9611193cdf8cce40bf9f895dd81570a, type: 3}
+  multiFireBallImage: {fileID: 21300000, guid: 7d812d82ba2cbc34d9f48ff8cb6e7436, type: 3}
+  multiIceBallImage: {fileID: 21300000, guid: f0ff5928398d3ce47aaff0a1f4003e53, type: 3}
+  fireAndIceBallImage: {fileID: 21300000, guid: 5203c914aa8fe6e41bb65baf64888d70,
+    type: 3}
 --- !u!4 &1377798157
 Transform:
   m_ObjectHideFlags: 0

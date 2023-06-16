@@ -107,4 +107,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPlayer: {fileID: 0}
   sourceCard: {fileID: 0}
-  effectImage: {fileID: 0}
+  effectImage: {fileID: 1641186417964048623}
