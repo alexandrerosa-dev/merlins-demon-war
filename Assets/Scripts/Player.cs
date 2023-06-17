@@ -12,8 +12,8 @@ public class Player : MonoBehaviour, IDropHandler
     public Image glowImage         = null;
 
     public int maxHealth = 5;
-    public int health  = 5; // current health / saúde atual
-    public int mana    = 1;
+    public int health    = 5; // current health / saúde atual
+    public int mana      = 1;
 
     public bool isPlayer;
     public bool isFire; // Whether an enemy is a fire monster or not / casa o inimigo seja um monstro de fogo ou não

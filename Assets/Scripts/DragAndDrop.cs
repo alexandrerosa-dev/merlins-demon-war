@@ -20,8 +20,20 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         transform.position += (Vector3)eventData.delta;
         Card card = GetComponent<Card>();
 
+        Card draggingCard = GetComponent<Card>();
+        bool overCard = false;
         foreach(GameObject hover in eventData.hovered)
         {
+            Player playerCard = hover.GetComponent<Player>();
+            if (playerCard != null)
+            {
+                if (GameController.instance.CardValid(draggingCard, playerCard, GameController.instance.playersHand))
+                {
+                    playerCard.glowImage.gameObject.SetActive(true);
+                    overCard = true;
+                }
+            }
+
             BurnZone burnZone = hover.GetComponent<BurnZone>();
             if (burnZone != null)
             {
@@ -31,6 +43,12 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             {
                 card.burnImage.gameObject.SetActive(false);
             }
+        }
+
+        if (!overCard)
+        {
+            GameController.instance.player.glowImage.gameObject.SetActive(false);
+            GameController.instance.enemy.glowImage.gameObject.SetActive(false);
         }
     }
 

@@ -13,7 +13,16 @@ public class Effect : MonoBehaviour
     {
         if (targetPlayer.hasMirror())
         {
+            targetPlayer.SetMirror(false);
 
+            if (targetPlayer.isPlayer)
+            {
+                GameController.instance.CastAttackEffect(sourceCard, GameController.instance.enemy);
+            }
+            else
+            {
+                GameController.instance.CastAttackEffect(sourceCard, GameController.instance.player);
+            }
         }
         else { 
         int damage = sourceCard.cardData.damage;
@@ -25,6 +34,7 @@ public class Effect : MonoBehaviour
                 damage = damage / 2;
         }
         targetPlayer.health -= damage;
+        targetPlayer.PlayHitAnim();
 
         GameController.instance.UpdateHealths();
         //todo check for death

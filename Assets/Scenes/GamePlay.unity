@@ -190,7 +190,8 @@ MonoBehaviour:
   mirrorImage: {fileID: 1041107781}
   healthNumberImage: {fileID: 312307474}
   glowImage: {fileID: 1968883698}
-  health: 5
+  maxHealth: 9
+  health: 9
   mana: 1
   isPlayer: 1
   isFire: 0
@@ -2977,7 +2978,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0827a876d206f5e45bd4fdbd4d9a4761, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cef1d8026780b264cb278091c18ae3e7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3434,10 +3435,11 @@ MonoBehaviour:
   mirrorImage: {fileID: 2017860676}
   healthNumberImage: {fileID: 1928803839}
   glowImage: {fileID: 1610956348}
+  maxHealth: 5
   health: 5
   mana: 1
   isPlayer: 0
-  isFire: 0
+  isFire: 1
   manaBalls:
   - {fileID: 1379015022}
   - {fileID: 196144984}
@@ -3615,14 +3617,14 @@ RectTransform:
   m_GameObject: {fileID: 2017860674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1926763547}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 175.2, y: -75.2}
+  m_AnchoredPosition: {x: -174, y: -75.2}
   m_SizeDelta: {x: 58, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2017860676

@@ -80,6 +80,9 @@ public class GameController : MonoBehaviour
 
         CastCard(card, usingOnPlayer, fromHand);
 
+        player.glowImage.gameObject.SetActive(false);
+        enemy.glowImage.gameObject.SetActive(false);
+
         fromHand.RemoveCard(card);
 
         return false;
