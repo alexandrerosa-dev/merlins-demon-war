@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class GameController : MonoBehaviour
     public Sprite multiFireBallImage  = null;
     public Sprite multiIceBallImage   = null;
     public Sprite fireAndIceBallImage = null;
+
+    public bool playersTurn = true;
+
+    public Text turnText = null;
     private void Awake()
     {
         instance = this;
@@ -144,7 +149,17 @@ public class GameController : MonoBehaviour
             }
             // todo Add score
         }
-        // todo update PLayer mana
+        
+        if (fromHand.isPlayers)
+        {
+            GameController.instance.player.mana -= card.cardData.cost;
+            GameController.instance.player.UpdateManaBalls();
+        }
+        else
+        {
+            GameController.instance.enemy.mana -= card.cardData.cost;
+            GameController.instance.enemy.UpdateManaBalls();
+        }
     }
 
     private IEnumerator CastHealEffect(Player usingOnPLayer)
@@ -203,4 +218,36 @@ public class GameController : MonoBehaviour
         }
     }
 
+    internal void NextPlayerTurn()
+    {
+        playersTurn = !playersTurn;
+
+        if (playersTurn)
+        {
+            if (player.mana < 5)
+                player.mana++;
+        }
+        else
+        {
+            if (enemy.mana < 5)
+                enemy.mana++;
+        }
+
+        SetTurnText();
+
+        player.UpdateManaBalls();
+        enemy.UpdateManaBalls();
+    }
+
+    internal void SetTurnText()
+    {
+        if (playersTurn)
+        {
+            turnText.text = "Merlin's turn";
+        }
+        else
+        {
+            turnText.text = "Enemy's turn";
+        }
+    }
 }
