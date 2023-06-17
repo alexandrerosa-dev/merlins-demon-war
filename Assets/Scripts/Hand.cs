@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class Hand
     public string[]    animNames = new string[3];
     public bool        isPlayers;
 
-    public void BurnCard(Card card)
+    public void RemoveCard(Card card)
     {
         for (int i=0; i<3; i++)
         {

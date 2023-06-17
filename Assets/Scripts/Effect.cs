@@ -11,6 +11,11 @@ public class Effect : MonoBehaviour
 
     public void EndTrigger()
     {
+        if (targetPlayer.hasMirror())
+        {
+
+        }
+        else { 
         int damage = sourceCard.cardData.damage;
         if (!targetPlayer.isPlayer) // monster / enemy
         {
@@ -20,9 +25,12 @@ public class Effect : MonoBehaviour
                 damage = damage / 2;
         }
         targetPlayer.health -= damage;
+
+        GameController.instance.UpdateHealths();
         //todo check for death
 
         GameController.instance.isPlayable = true;
+        }
 
         Destroy(gameObject);
     }

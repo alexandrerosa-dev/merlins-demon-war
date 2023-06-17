@@ -71,7 +71,6 @@ public class GameController : MonoBehaviour
 
     internal bool UseCard(Card card, Player usingOnPlayer, Hand fromHand)
     {
-        // CastCard
         // RemoveCard
         // DealReplacementCard
         if (!CardValid(card, usingOnPlayer, fromHand))
@@ -80,6 +79,8 @@ public class GameController : MonoBehaviour
         isPlayable = false;
 
         CastCard(card, usingOnPlayer, fromHand);
+
+        fromHand.RemoveCard(card);
 
         return false;
     }
@@ -118,12 +119,21 @@ public class GameController : MonoBehaviour
     {
         if (card.cardData.isMirrorCard)
         {
+            usingOnPlayer.SetMirror(true);
+            isPlayable = true;
         }
         else
         {
-            if (card.cardData.isDefenseCard)
+            if (card.cardData.isDefenseCard) // health cards / cartas de cura
             {
+                usingOnPlayer.health += card.cardData.damage;
 
+                if (usingOnPlayer.health > usingOnPlayer.maxHealth)
+                    usingOnPlayer.health = usingOnPlayer.maxHealth;
+
+                UpdateHealths();
+
+                StartCoroutine(CastHealEffect(usingOnPlayer));
             }
             else // Attack card /  carta de ataque
             {
@@ -132,6 +142,12 @@ public class GameController : MonoBehaviour
             // todo Add score
         }
         // todo update PLayer mana
+    }
+
+    private IEnumerator CastHealEffect(Player usingOnPLayer)
+    {
+        yield return new WaitForSeconds(0.5f);
+        isPlayable = true;
     }
 
     internal void CastAttackEffect(Card card, Player usingOnPlayer)
@@ -168,4 +184,20 @@ public class GameController : MonoBehaviour
             }
         }
     }
+
+    internal void UpdateHealths()
+    {
+        player.UpdateHealth();
+        enemy.UpdateHealth();
+
+        if (player.health <= 0)
+        {
+            // GameOver
+        }
+        if (enemy.health <= 0)
+        {
+            // todo new enemy
+        }
+    }
+
 }

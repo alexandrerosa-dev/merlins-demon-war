@@ -11,7 +11,7 @@ public class BurnZone : MonoBehaviour, IDropHandler
         Card card = obj.GetComponent<Card>();
         if (card != null)
         {
-            GameController.instance.playersHand.BurnCard(card);
+            GameController.instance.playersHand.RemoveCard(card);
         }
     }
 }
