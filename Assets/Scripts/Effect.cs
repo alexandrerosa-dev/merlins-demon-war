@@ -47,17 +47,14 @@ public class Effect : MonoBehaviour
             if (targetPlayer.health <= 0)
             {
                 targetPlayer.health = 0;
-                targetPlayer.PlayDieSound();
-                /*
                 if (targetPlayer.isPlayer)
                 {
-                    GameController.instance.player.PlayDieSound();
+                    GameController.instance.PlayPlayerDieSound();
                 }
                 else
                 {
-
+                    GameController.instance.PlayEnemyDieSound();
                 }
-                */
             }
 
             if (!bounce)
