@@ -11,8 +11,10 @@ public class Effect : MonoBehaviour
 
     public void EndTrigger()
     {
+        bool bounce = false;
         if (targetPlayer.hasMirror())
         {
+            bounce = true;
             targetPlayer.SetMirror(false);
 
             if (targetPlayer.isPlayer)
@@ -33,13 +35,17 @@ public class Effect : MonoBehaviour
             if (sourceCard.cardData.damageType == CardData.DamageType.Ice && !targetPlayer.isFire)
                 damage = damage / 2;
         }
-        targetPlayer.health -= damage;
-        targetPlayer.PlayHitAnim();
+            targetPlayer.health -= damage;
+            targetPlayer.PlayHitAnim();
 
-        GameController.instance.UpdateHealths();
-        //todo check for death
+            GameController.instance.UpdateHealths();
 
-        GameController.instance.isPlayable = true;
+            //todo check for death
+
+            if (!bounce)
+            GameController.instance.NextPlayerTurn();
+
+            GameController.instance.isPlayable = true;
         }
 
         Destroy(gameObject);

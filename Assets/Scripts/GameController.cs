@@ -59,7 +59,8 @@ public class GameController : MonoBehaviour
     //TODO Finish this code
     public void SkipTurn()
     {
-        Debug.Log("Skip turn");
+        if (playersTurn && isPlayable)
+            NextPlayerTurn();
     }
 
     internal IEnumerator DealHands()
@@ -128,6 +129,7 @@ public class GameController : MonoBehaviour
         if (card.cardData.isMirrorCard)
         {
             usingOnPlayer.SetMirror(true);
+            NextPlayerTurn();
             isPlayable = true;
         }
         else
@@ -165,6 +167,7 @@ public class GameController : MonoBehaviour
     private IEnumerator CastHealEffect(Player usingOnPLayer)
     {
         yield return new WaitForSeconds(0.5f);
+        NextPlayerTurn();
         isPlayable = true;
     }
 
@@ -237,6 +240,9 @@ public class GameController : MonoBehaviour
 
         player.UpdateManaBalls();
         enemy.UpdateManaBalls();
+
+        if (!playersTurn)
+            MonsterTurn();
     }
 
     internal void SetTurnText()
@@ -248,6 +254,58 @@ public class GameController : MonoBehaviour
         else
         {
             turnText.text = "Enemy's turn";
+        }
+    }
+
+    private void MonsterTurn()
+    {
+        Card card = AIChooseCard();
+        StartCoroutine(MonsterCastCard(card));
+    }
+
+    private Card AIChooseCard()
+    {
+        List<Card> available = new List<Card>();
+        for(int i = 0; i < 3; i++)
+        {
+            if (CardValid(enemysHand.cards[i], enemy, enemysHand))
+                available.Add(enemysHand.cards[i]);
+            else if (CardValid(enemysHand.cards[i], player, enemysHand))
+                available.Add(enemysHand.cards[i]);
+        }
+
+        if (available.Count == 0) //none available / nenhum disponível 
+        {
+            NextPlayerTurn();
+            return null;
+        }
+        int choice = UnityEngine.Random.Range(0, available.Count);
+        return available[choice];
+    }
+
+    private IEnumerator MonsterCastCard(Card card)
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if (card)
+        {
+            // Turn over player
+
+            yield return new WaitForSeconds(2);
+
+            // Use card
+
+            yield return new WaitForSeconds(1);
+
+            // Deal card
+
+            yield return new WaitForSeconds(1);
+        }
+        else // no card to choose, skip turn / não há cartas para escolher, pular turno
+        {
+            // Display enemy skipturn
+            yield return new WaitForSeconds(1);
+            // Hide enemy skipturn
         }
     }
 }

@@ -2234,6 +2234,8 @@ MonoBehaviour:
   multiIceBallImage: {fileID: 21300000, guid: f0ff5928398d3ce47aaff0a1f4003e53, type: 3}
   fireAndIceBallImage: {fileID: 21300000, guid: 5203c914aa8fe6e41bb65baf64888d70,
     type: 3}
+  playersTurn: 1
+  turnText: {fileID: 1610732761}
 --- !u!4 &1377798157
 Transform:
   m_ObjectHideFlags: 0
@@ -3437,7 +3439,7 @@ MonoBehaviour:
   glowImage: {fileID: 1610956348}
   maxHealth: 5
   health: 5
-  mana: 1
+  mana: 0
   isPlayer: 0
   isFire: 1
   manaBalls:
