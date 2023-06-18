@@ -47,7 +47,10 @@ public class GameController : MonoBehaviour
     public Image enemySkipTurn = null;
 
     public Sprite fireDemon = null;
-    public Sprite iceDemon = null;
+    public Sprite iceDemon  = null;
+
+    public AudioSource playerDieAudio = null;
+    public AudioSource enemyDieAudio  = null;
 
     private void Awake()
     {
@@ -141,6 +144,7 @@ public class GameController : MonoBehaviour
         if (card.cardData.isMirrorCard)
         {
             usingOnPlayer.SetMirror(true);
+            usingOnPlayer.PlayMirrorSound();
             NextPlayerTurn();
             isPlayable = true;
         }
@@ -149,6 +153,7 @@ public class GameController : MonoBehaviour
             if (card.cardData.isDefenseCard) // health cards / cartas de cura
             {
                 usingOnPlayer.health += card.cardData.damage;
+                usingOnPlayer.PlayHealSound();
 
                 if (usingOnPlayer.health > usingOnPlayer.maxHealth)
                     usingOnPlayer.health = usingOnPlayer.maxHealth;
@@ -209,16 +214,20 @@ public class GameController : MonoBehaviour
                         effect.effectImage.sprite = multiFireBallImage;
                     else
                         effect.effectImage.sprite = fireBallImage;
+                    effect.PlayFireballSound();
                 break;
                 case CardData.DamageType.Ice:
                     if (card.cardData.isMulti)
                         effect.effectImage.sprite = multiIceBallImage;
                     else
                         effect.effectImage.sprite = iceBallImage;
+                    effect.PlayIceSound();
                 break;
                 case CardData.DamageType.Both:
                     effect.effectImage.sprite = fireAndIceBallImage;
-                break;
+                    effect.PlayFireballSound();
+                    effect.PlayIceSound();
+                    break;
             }
         }
     }
@@ -391,5 +400,15 @@ public class GameController : MonoBehaviour
     private void UpdateScore()
     {
         scoreText.text = "Demons killed: " + playerKills.ToString() + ".  Score: " + playerScore.ToString();
+    }
+
+    internal void PlayPlayerDieSound()
+    {
+        playerDieAudio.Play();
+    }
+
+    internal void PlayEnemyDieSound()
+    {
+        enemyDieAudio.Play();
     }
 }

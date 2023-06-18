@@ -22,6 +22,11 @@ public class Player : MonoBehaviour, IDropHandler
 
     private Animator animator = null;
 
+    public AudioSource dealAudio   = null;
+    public AudioSource healAudio   = null;
+    public AudioSource mirrorAudio = null;
+    public AudioSource smashAudio  = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,5 +88,22 @@ public class Player : MonoBehaviour, IDropHandler
             else
                 manaBalls[m].SetActive(false);
         }
+    }
+
+    internal void PlayMirrorSound()
+    {
+        mirrorAudio.Play();
+    }
+    internal void PlaySmahSound()
+    {
+        smashAudio.Play();
+    }
+    internal void PlayHealSound()
+    {
+        healAudio.Play();
+    }
+    internal void PlayDealSound()
+    {
+        dealAudio.Play();
     }
 }

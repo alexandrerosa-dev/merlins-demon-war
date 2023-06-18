@@ -9,6 +9,9 @@ public class Effect : MonoBehaviour
     public Card   sourceCard   = null;
     public Image  effectImage  = null;
 
+    public AudioSource iceAudio  = null;
+    public AudioSource fireballAudio = null;
+
     public void EndTrigger()
     {
         bool bounce = false;
@@ -16,6 +19,7 @@ public class Effect : MonoBehaviour
         {
             bounce = true;
             targetPlayer.SetMirror(false);
+            targetPlayer.PlaySmahSound();
 
             if (targetPlayer.isPlayer)
             {
@@ -40,7 +44,21 @@ public class Effect : MonoBehaviour
 
             GameController.instance.UpdateHealths();
 
-            //todo check for death
+            if (targetPlayer.health <= 0)
+            {
+                targetPlayer.health = 0;
+                targetPlayer.PlayDieSound();
+                /*
+                if (targetPlayer.isPlayer)
+                {
+                    GameController.instance.player.PlayDieSound();
+                }
+                else
+                {
+
+                }
+                */
+            }
 
             if (!bounce)
             GameController.instance.NextPlayerTurn();
@@ -49,5 +67,15 @@ public class Effect : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    internal void PlayIceSound()
+    {
+        iceAudio.Play();
+    }
+
+    internal void PlayFireballSound()
+    {
+        fireballAudio.Play();
     }
 }
