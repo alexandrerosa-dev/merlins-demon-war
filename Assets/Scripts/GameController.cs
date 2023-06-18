@@ -39,6 +39,8 @@ public class GameController : MonoBehaviour
     public bool playersTurn = true;
 
     public Text turnText = null;
+
+    public Image enemySkipTurn = null;
     private void Awake()
     {
         instance = this;
@@ -221,6 +223,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(1);
+    }
+
     internal void NextPlayerTurn()
     {
         playersTurn = !playersTurn;
@@ -289,23 +296,37 @@ public class GameController : MonoBehaviour
 
         if (card)
         {
-            // Turn over player
+            TurnCard(card);
 
             yield return new WaitForSeconds(2);
 
-            // Use card
+            if (card.cardData.isDefenseCard)
+                UseCard(card, enemy, enemysHand);
+            else // attack card
+                UseCard(card, player, enemysHand);
 
             yield return new WaitForSeconds(1);
 
-            // Deal card
+            enemyDeck.DealCard(enemysHand);
 
             yield return new WaitForSeconds(1);
         }
         else // no card to choose, skip turn / não há cartas para escolher, pular turno
         {
-            // Display enemy skipturn
+            enemySkipTurn.gameObject.SetActive(true);
             yield return new WaitForSeconds(1);
-            // Hide enemy skipturn
+            enemySkipTurn.gameObject.SetActive(false);
         }
+    }
+
+    internal void TurnCard(Card card)
+    {
+        Animator animator = card.GetComponentInChildren<Animator>();
+        if (animator)
+        {
+            animator.SetTrigger("Flip");
+        }
+        else
+            Debug.LogError("No Animator found");
     }
 }
