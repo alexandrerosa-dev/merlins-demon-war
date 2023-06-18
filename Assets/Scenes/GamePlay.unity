@@ -325,12 +325,12 @@ GameObject:
   - component: {fileID: 185527840}
   - component: {fileID: 185527839}
   m_Layer: 5
-  m_Name: Image
+  m_Name: EnemySkpImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &185527838
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2308,6 +2308,12 @@ MonoBehaviour:
     type: 3}
   playersTurn: 1
   turnText: {fileID: 1610732761}
+  scoreText: {fileID: 470801386}
+  playerScore: 0
+  playerKills: 0
+  enemySkipTurn: {fileID: 185527839}
+  fireDemon: {fileID: 21300000, guid: 0aabe9c45d4e3884b91da8123e3a0d53, type: 3}
+  iceDemon: {fileID: 21300000, guid: ac9fb7054b00579468904c2fddd9d9a8, type: 3}
 --- !u!4 &1377798157
 Transform:
   m_ObjectHideFlags: 0

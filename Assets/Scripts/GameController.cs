@@ -38,12 +38,22 @@ public class GameController : MonoBehaviour
 
     public bool playersTurn = true;
 
-    public Text turnText = null;
+    public Text turnText  = null;
+    public Text scoreText = null;
+
+    public int playerScore = 0;
+    public int playerKills = 0;
 
     public Image enemySkipTurn = null;
+
+    public Sprite fireDemon = null;
+    public Sprite iceDemon = null;
+
     private void Awake()
     {
         instance = this;
+
+        SetUpEnemy();
 
         playerDeck.Create();
         enemyDeck.Create();
@@ -152,6 +162,11 @@ public class GameController : MonoBehaviour
                 CastAttackEffect(card, usingOnPlayer);// CastAttackEffect
             }
             // todo Add score
+
+            if (fromHand.isPlayers)
+                playerScore += card.cardData.damage;
+
+            UpdateScore();
         }
         
         if (fromHand.isPlayers)
@@ -215,41 +230,84 @@ public class GameController : MonoBehaviour
 
         if (player.health <= 0)
         {
-            // GameOver
+            StartCoroutine(GameOver());
         }
         if (enemy.health <= 0)
         {
-            // todo new enemy
+            playerKills++;
+            playerScore += 100;
+            UpdateScore();
+            StartCoroutine(NewEnemy());
         }
+    }
+
+    private IEnumerator NewEnemy()
+    {
+        enemy.gameObject.SetActive(false);
+        // clear enemy hand
+        enemysHand.ClearHand();
+        yield return new WaitForSeconds(0.75f);
+        SetUpEnemy();
+        enemy.gameObject.SetActive(true);
+        StartCoroutine(DealHands());
+    }
+
+    private void SetUpEnemy()
+    {
+        enemy.mana = 0;
+        enemy.health = 5;
+        enemy.UpdateHealth();
+        enemy.isFire = true;
+        if (UnityEngine.Random.Range(0, 2) == 1)
+            enemy.isFire = false;
+        if (enemy.isFire)
+            enemy.playerImage.sprite = fireDemon;
+        else
+            enemy.playerImage.sprite = iceDemon;
     }
 
     private IEnumerator GameOver()
     {
         yield return new WaitForSeconds(1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
 
     internal void NextPlayerTurn()
     {
         playersTurn = !playersTurn;
-
+        bool enemyIsDead = false;
         if (playersTurn)
         {
             if (player.mana < 5)
                 player.mana++;
         }
-        else
+        else // enemy
         {
-            if (enemy.mana < 5)
-                enemy.mana++;
+            if (enemy.health > 0)
+            {
+                if (enemy.mana < 5)
+                    enemy.mana++;
+            }
+            else
+                enemyIsDead = true;
         }
 
-        SetTurnText();
+        if (enemyIsDead)
+        {
+            playersTurn = !playersTurn;
+            if (player.mana < 5)
+                player.mana++;
+        }
+        else
+        {
+            SetTurnText();
+            if (!playersTurn)
+                MonsterTurn();
+        }
 
         player.UpdateManaBalls();
         enemy.UpdateManaBalls();
 
-        if (!playersTurn)
-            MonsterTurn();
     }
 
     internal void SetTurnText()
@@ -328,5 +386,10 @@ public class GameController : MonoBehaviour
         }
         else
             Debug.LogError("No Animator found");
+    }
+
+    private void UpdateScore()
+    {
+        scoreText.text = "Demons killed: " + playerKills.ToString() + ".  Score: " + playerScore.ToString();
     }
 }

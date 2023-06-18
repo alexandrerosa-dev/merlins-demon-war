@@ -60,7 +60,7 @@ public class Player : MonoBehaviour, IDropHandler
         }
         else
         {
-            Debug.LogError("Health is not a valid number!"+health.ToString());
+            Debug.LogWarning("Health is not a valid number!"+health.ToString());
         }
     }
 

@@ -27,4 +27,13 @@ public class Hand
             }
         }
     }
+
+    internal void ClearHand()
+    {
+        for(int i=0; i<3; i++)
+        {
+            GameObject.Destroy(cards[i].gameObject);
+            cards[i] = null;
+        }
+    }
 }
