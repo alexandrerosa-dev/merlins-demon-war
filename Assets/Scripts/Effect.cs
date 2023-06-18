@@ -9,8 +9,9 @@ public class Effect : MonoBehaviour
     public Card   sourceCard   = null;
     public Image  effectImage  = null;
 
-    public AudioSource iceAudio  = null;
+    public AudioSource iceAudio      = null;
     public AudioSource fireballAudio = null;
+    public AudioSource boomAudio     = null;
 
     public void EndTrigger()
     {
@@ -19,7 +20,7 @@ public class Effect : MonoBehaviour
         {
             bounce = true;
             targetPlayer.SetMirror(false);
-            targetPlayer.PlaySmahSound();
+            targetPlayer.PlaySmashSound();
 
             if (targetPlayer.isPlayer)
             {
@@ -74,5 +75,10 @@ public class Effect : MonoBehaviour
     internal void PlayFireballSound()
     {
         fireballAudio.Play();
+    }
+
+    internal void PlayBoomSound()
+    {
+        boomAudio.Play();
     }
 }

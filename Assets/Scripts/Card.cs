@@ -7,13 +7,14 @@ public class Card : MonoBehaviour
 {
     public CardData cardData = null;
 
-    public Text titleText = null;
+    public Text titleText       = null;
     public Text descriptionText = null;
-    public Image damageImage = null;
-    public Image costImage = null;
-    public Image cardImage = null;
-    public Image frameImage = null;
-    public Image burnImage = null;
+    public Image damageImage    = null;
+    public Image costImage      = null;
+    public Image cardImage      = null;
+    public Image frameImage     = null;
+    public Image burnImage      = null;
+    public Image DestructImage  = null;
 
     public void Initialise()
     {

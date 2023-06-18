@@ -94,7 +94,7 @@ public class Player : MonoBehaviour, IDropHandler
     {
         mirrorAudio.Play();
     }
-    internal void PlaySmahSound()
+    internal void PlaySmashSound()
     {
         smashAudio.Play();
     }

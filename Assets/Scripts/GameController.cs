@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour
     public Sprite multiFireBallImage  = null;
     public Sprite multiIceBallImage   = null;
     public Sprite fireAndIceBallImage = null;
+    public Sprite destructBallImage = null;
 
     public bool playersTurn = true;
 
@@ -228,6 +229,10 @@ public class GameController : MonoBehaviour
                     effect.PlayFireballSound();
                     effect.PlayIceSound();
                     break;
+                case CardData.DamageType.Destruct:
+                    effect.effectImage.sprite = destructBallImage;
+                    effect.PlayBoomSound(); 
+                    break;
             }
         }
     }
@@ -411,4 +416,5 @@ public class GameController : MonoBehaviour
     {
         enemyDieAudio.Play();
     }
+
 }
